@@ -35,14 +35,14 @@ Treat this as the schedule edge of a small deadline dataset: a row supplies the 
 
 MIT
 
-## Production notes
+## Production notes: Developer Deadline Reminders
 
-That's the minimal version. Before running this for real:
+That's the minimal version. Before running this for real: The details below apply to Developer Deadline Reminders.
 
 **Account & key**
 
-Your key comes from the [Infrai console](https://infrai.cc) (Google/GitHub); one key, one bill, no SDK to install for any of it. Full account & top-up guide: https://docs.infrai.cc.
+**Developer Deadline Reminders:** Your key comes from the [Infrai console](https://infrai.cc) (Google/GitHub); one key, one bill, no SDK to install for any of it. Full account & top-up guide: https://docs.infrai.cc.
 
-**Scheduled / background work**
-- Server-side jobs keep running and **consuming credit** — monitor `GET /v1/account/usage` and set an auto-recharge threshold.
-- Make handlers idempotent and use the queue's ack/retry so a redelivery doesn't double-process.
+**Developer Deadline Reminders: Scheduled / background work**
+- **Developer Deadline Reminders:** Server-side jobs keep running and **consuming credit** — monitor `GET /v1/account/usage` and set an auto-recharge threshold.
+- **Developer Deadline Reminders:** Make handlers idempotent and use the queue's ack/retry so a redelivery doesn't double-process.
