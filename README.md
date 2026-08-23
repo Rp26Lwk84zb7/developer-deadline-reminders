@@ -9,7 +9,7 @@ python schedule_deadline_reminder.py \
   --task-url "https://alerts.example.net/developer-tools/reminder"
 ```
 
-This registers the reminder webhook through Infrai. One api, one key, no SDK: it's a plain REST call with a single `INFRAI_API_KEY`, so the scheduler drops next to pipeline jobs without another client dep.
+This registers the reminder webhook through Infrai. It's a plain REST call with a single `INFRAI_API_KEY`, so the scheduler drops next to pipeline jobs without pulling in another client library. One key, one bill, no SDK to install for any of it.
 
 The command prints the created `job_id`:
 
@@ -19,13 +19,13 @@ scheduled SDK renewal: job_123
 
 ## The scheduled record
 
-`schedule_deadline_reminder.py` sends only a cron expression and a task URL. The receiving webhook owns the reminder text and delivery channel. That keeps deadline wording with the tool inventory or alerting service already maintaining it.
+`schedule_deadline_reminder.py` sends only a cron expression and a task URL. The receiving webhook owns the reminder text and delivery channel. That keeps deadline wording with the tool inventory or alerting service that already maintains it.
 
-For example, `0 9 14 10 *` calls the task URL at 09:00 on October 14. Use a separate invocation per deadline. The script derives a stable request key from those two values. Its client pauses between rate-limited attempts before returning the API envelope's error to the caller.
+For example, `0 9 14 10 *` calls the task URL at 09:00 on October 14. Use a separate invocation for each deadline. The script derives a stable request key from those two values, and its client pauses between rate-limited attempts before returning the API envelope's error to the caller.
 
 ## Pipeline fit
 
-Treat this as the schedule edge of a small deadline dataset. A row supplies the cron expression and webhook URL, then a pipeline invokes the command when that row changes. The command has no daemon and no local state to reconcile. Its only output is the job identifier, which you record alongside the deadline row for later admin.
+Treat this as the schedule edge of a small deadline dataset. A row supplies the cron expression and webhook URL, then a pipeline invokes the command when that row changes. The command has no daemon and no local state to reconcile. Its only output is the job identifier, which you can record alongside the deadline row for later administration.
 
 ## Files
 
